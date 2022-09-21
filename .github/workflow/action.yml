@@ -1,0 +1,32 @@
+name: test
+
+# # 单个事件
+# on: push
+
+# # 多个事件列表
+# on: [push, pull_request]
+
+# # 指定main分支的push
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macOS-latest, ubuntu-latest]
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v1
+
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      
+      - name: electron playwright test
+        run: |
+          npm install && npm run e2e
