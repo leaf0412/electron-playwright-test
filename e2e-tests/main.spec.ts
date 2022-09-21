@@ -142,11 +142,11 @@ test('select a menu item via the main process', async () => {
 
 test('make sure two screenshots of the same page match', async ({page}) => {
   // take a screenshot of the current page
-  const screenshot1: Buffer = await page.screenshot()
+  const screenshot1 = await page.screenshot()
   // create a visual hash using Jimp
   const screenshot1hash = (await jimp.read(screenshot1)).hash()
   // take a screenshot of the page
-  const screenshot2: Buffer = await page.screenshot()
+  const screenshot2 = await page.screenshot()
   // create a visual hash using Jimp
   const screenshot2hash = (await jimp.read(screenshot2)).hash()
   // compare the two hashes
