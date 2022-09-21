@@ -2,27 +2,22 @@ import { _electron as electron } from 'playwright';
 import { test } from '@playwright/test';
 
 test('screenshot', async () => {
-  // Launch Electron app.
+  // 启动Electron应用程序
   const electronApp = await electron.launch({
+    // 主进程的路径
     args: ['./.webpack/main/index.js', ],
   });
 
-  // Evaluation expression in the Electron context.
+  // 根据 Electron 主进程获取对应程序路径
   const appPath = await electronApp.evaluate(async ({ app }) => {
-    // This runs in the main Electron process, parameter here is always
-    // the result of the require('electron') in the main app script.
     return app.getAppPath();
   });
   console.log(appPath);
 
-  // Get the first window that the app opens, wait if necessary.
+  // 获取应用程序打开的第一个窗口
   const window = await electronApp.firstWindow();
-  // Print the title.
+  // 打印窗口标题
   console.log(await window.title());
-  // Capture a screenshot.
-  // await window.screenshot({ path: 'assets/images/intro.png' });
-  // Direct Electron console to Node terminal.
-  window.on('console', console.log);
-  // Exit app.
+  // 关闭程序
   await electronApp.close();
 });

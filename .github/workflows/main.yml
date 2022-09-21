@@ -1,5 +1,9 @@
 name: test
 
+defaults:
+  run:
+    shell: 'bash'
+
 # # 单个事件
 # on: push
 
@@ -26,10 +30,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
+      - run: npm ci
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       
       - name: electron playwright test
-        run: |
-          npm install
-          npm run package
-          ls
-          npm run e2e
+      - run: xvfb-run --auto-servernum --server-args="-screen 0 1280x960x24" -- npm run e2e --if-present
+        if: matrix.os == 'ubuntu-latest'
+
+      - run: npm run e2e --if-present
+        if: matrix.os != 'ubuntu-latest'
