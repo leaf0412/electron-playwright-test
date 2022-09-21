@@ -1,9 +1,5 @@
 name: test
 
-defaults:
-  run:
-    shell: 'bash'
-
 # # 单个事件
 # on: push
 
