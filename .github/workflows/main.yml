@@ -29,4 +29,5 @@ jobs:
       
       - name: electron playwright test
         run: |
-          npm install && npm run e2e
+          npm install 
+          npm run e2e
