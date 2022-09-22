@@ -23,8 +23,6 @@ jobs:
           node-version: 16
       
       - run: npm install
-
-      - run: npm i -D playwright
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
 
