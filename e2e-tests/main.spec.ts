@@ -149,6 +149,8 @@ test('make sure two screenshots of the same page match', async ({page}) => {
   const screenshot2 = await page.screenshot()
   // create a visual hash using Jimp
   const screenshot2hash = (await jimp.read(screenshot2)).hash()
+  console.log('screenshot1hash screenshot2hash', screenshot1hash, screenshot2hash);
+  
   // compare the two hashes
   expect(screenshot1hash).toEqual(screenshot2hash)
 })
